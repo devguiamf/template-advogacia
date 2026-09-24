@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Costa & Mendes">
+  <rect x="2" y="2" width="60" height="60" rx="2" stroke="#1B2A4A" stroke-width="1.5"/>
+  <path d="M10 10h18v2H12v40h16v2H10V10Z" fill="#1B2A4A"/>
+  <path d="M36 10h18v44H36v-2h16V12H36V10Z" fill="#0D7377"/>
+  <path d="M22 22h20v2H22v-2Zm0 8h14v2H22v-2Zm0 8h18v2H22v-2Z" fill="#1B2A4A" opacity="0.35"/>
+  <path d="M40 40l12-12v12H40Z" fill="#0D7377"/>
+</svg>

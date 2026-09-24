@@ -1,26 +1,184 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --duration-exit: 150ms;
+  --duration-enter: 210ms;
+  --duration-move: 400ms;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-navy: #1b2a4a;
+  --color-brand-teal: #0d7377;
+  --color-brand-charcoal: #242830;
+  --color-brand-muted: #5c6473;
+  --color-brand-sand: #f7f5f2;
+  --color-brand-cream: #efece6;
+  --color-brand-border: #e2ded6;
+  --color-brand-lightline: rgb(27 42 74 / 0.12);
+  --color-primary: #1b2a4a;
+  --color-secondary: #0d7377;
+  --color-on-surface-variant: #5c6473;
+  --color-outline-variant: #d8d4ca;
+  --color-surface-lowest: #ffffff;
+  --font-headline: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-brand-sand);
+  color: var(--color-brand-charcoal);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-brand-teal);
+  color: white;
+}
+
+.font-headline {
+  font-family: var(--font-headline);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.transition-editorial {
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* —— Parallax (CSS scroll-driven) —— */
+
+@keyframes hero-drift {
+  from {
+    transform: translateY(0) scale(1.08);
+  }
+  to {
+    transform: translateY(14%) scale(1.08);
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0.35;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-parallax {
+  animation: hero-drift linear both;
+  animation-timeline: scroll();
+  animation-range: 0% 80vh;
+}
+
+.method-step {
+  animation: fade-rise linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+/* —— View Transitions —— */
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+
+::view-transition-old(.fade-out) {
+  animation: var(--duration-exit) ease-in fade reverse;
+}
+
+::view-transition-new(.fade-in) {
+  animation: var(--duration-enter) ease-out var(--duration-exit) both fade;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-exit) ease-in both fade reverse,
+    var(--duration-move) ease-in-out both slide reverse;
+}
+
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both fade,
+    var(--duration-move) ease-in-out both slide;
+}
+
+::view-transition-group(.text-morph) {
+  animation-duration: var(--duration-move);
+}
+
+::view-transition-old(.text-morph) {
+  display: none;
+}
+
+::view-transition-new(.text-morph) {
+  animation: none;
+  object-fit: none;
+  object-position: left top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-parallax,
+  .method-step {
+    animation: none !important;
+  }
+
+  .hero-parallax {
+    transform: scale(1.02);
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
