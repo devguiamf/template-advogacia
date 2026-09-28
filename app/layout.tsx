@@ -42,6 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-brand-sand text-brand-charcoal font-body">

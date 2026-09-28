@@ -10,7 +10,10 @@ const legalLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="w-full border-t border-outline-variant/20 bg-surface-lowest">
+    <footer
+      className="w-full border-t border-outline-variant/20 bg-surface-lowest"
+      style={{ viewTransitionName: "site-footer" }}
+    >
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 lg:flex-row lg:items-center lg:justify-between lg:px-12">
         <div className="flex items-center gap-3">
           <BrandMark size={28} />

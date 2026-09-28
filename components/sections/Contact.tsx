@@ -64,7 +64,7 @@ export function ContactSection() {
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-6 lg:col-span-5">
+          <div className="space-y-6 lg:col-span-5 lg:sticky lg:top-28">
             <span className="font-body block text-xs font-semibold tracking-[0.25em] text-brand-teal uppercase">
               Atendimento Reservado
             </span>

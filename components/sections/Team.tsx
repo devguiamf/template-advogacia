@@ -27,7 +27,7 @@ export function TeamSection() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-16">
           {team.map((member) => (
             <ViewTransition key={member.slug}>
-              <article className="space-y-4">
+              <article className="group space-y-4">
                 <div className="border-b border-brand-lightline pb-4">
                   <ViewTransition
                     name={`pessoa-${member.slug}`}
@@ -38,7 +38,7 @@ export function TeamSection() {
                       <Link
                         href={`/equipe/${member.slug}`}
                         transitionTypes={["nav-forward"]}
-                        className="transition-colors hover:text-brand-teal"
+                        className="hairline-link transition-colors hover:text-brand-teal"
                       >
                         {member.name}
                       </Link>
@@ -60,7 +60,12 @@ export function TeamSection() {
                   className="inline-flex items-center gap-2 font-body text-sm font-semibold text-brand-navy transition-editorial hover:text-brand-teal"
                 >
                   Perfil completo
-                  <span aria-hidden>→</span>
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
                 </Link>
               </article>
             </ViewTransition>
